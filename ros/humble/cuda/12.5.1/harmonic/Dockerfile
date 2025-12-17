@@ -1,0 +1,131 @@
+# Ubuntu 관련 ------------------------------------------------------------
+ARG UBUNTU_RELEASE=22.04
+
+# CUDA 관련 ------------------------------------------------------------
+ARG CUDA_VERSION=12.5.1
+ARG CUDA_RELEASE=12.5
+ARG CUDA_PURPOSE=devel
+# ARG CUDNN_VERSION="cudnn-"
+ARG CUDNN_VERSION=""
+
+# CUDA Docker 이미지 다운로드 ------------------------------------------------------------
+FROM nvcr.io/nvidia/cuda:${CUDA_VERSION}-${CUDNN_VERSION}${CUDA_PURPOSE}-ubuntu${UBUNTU_RELEASE}
+
+# 비대화 설치 모드, NVIDIA 설정 ------------------------------------------------------------
+ENV DEBIAN_FRONTEND=noninteractive
+ENV NVIDIA_VISIBLE_DEVICES=all
+ENV NVIDIA_DRIVER_CAPABILITIES=all
+ENV XDG_RUNTIME_DIR=/tmp/runtime-root
+
+# 필수 패키지 설치 ------------------------------------------------------------
+RUN apt-get clean && apt-get update && apt-get upgrade -y && apt-get install --no-install-recommends -y \
+    apt-transport-https \
+    apt-utils \
+    build-essential \
+    ca-certificates \
+    curl \
+    git \
+    locales \
+    python3-pip \
+    software-properties-common \
+    sudo \
+    vim \
+    wget \
+    && rm -rf /var/lib/apt/lists/*
+
+# 로케일 설정 ------------------------------------------------------------
+RUN locale-gen en_US en_US.UTF-8 && update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+ENV LANG=en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
+ENV LANGUAGE=en_US:en
+
+# ROS2 humble 설치 ------------------------------------------------------------
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gnupg2 \
+    lsb-release \
+    software-properties-common \
+    && curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg \
+    && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" \
+    > /etc/apt/sources.list.d/ros2.list
+
+# ROS2 설치 ------------------------------------------------------------
+ARG ROS_VERSION=humble
+ENV ROS_DISTRO=${ROS_VERSION}
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ros-${ROS_DISTRO}-desktop \
+    ros-dev-tools \
+    && rm -rf /var/lib/apt/lists/*
+
+# ROS2 관련 패키지 설치 ------------------------------------------------------------
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    # Vision 관련
+    libopencv-dev \
+    ros-${ROS_DISTRO}-image-transport \
+    ros-${ROS_DISTRO}-cv-bridge \
+    ros-${ROS_DISTRO}-camera-info-manager \
+    ros-${ROS_DISTRO}-vision-opencv \
+    ros-${ROS_DISTRO}-sensor-msgs \
+    ros-${ROS_DISTRO}-rclpy \
+    # 로봇 설명 및 시각화
+    ros-${ROS_DISTRO}-urdf \
+    ros-${ROS_DISTRO}-xacro \
+    ros-${ROS_DISTRO}-joint-state-publisher \
+    ros-${ROS_DISTRO}-joint-state-publisher-gui \
+    ros-${ROS_DISTRO}-robot-state-publisher \
+    ros-${ROS_DISTRO}-rviz2 \
+    # 제어 관련
+    ros-${ROS_DISTRO}-ros2-control \
+    ros-${ROS_DISTRO}-ros2-controllers \
+    ros-${ROS_DISTRO}-ament-cmake \
+    && rm -rf /var/lib/apt/lists/*
+
+# GZ SIM 설치 ------------------------------------------------------------
+ARG GAZEBO_VERSION=harmonic
+ENV GAZEBO_DISTRO=${GAZEBO_VERSION}
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    gnupg2 \
+    lsb-release \
+    && mkdir -p /usr/share/keyrings \
+    && curl -sSL https://packages.osrfoundation.org/gazebo.key | gpg --dearmor -o /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg \
+    && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" \
+    > /etc/apt/sources.list.d/gazebo-stable.list
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gz-${GAZEBO_DISTRO} \
+    ros-${ROS_DISTRO}-ros-gz \
+    && rm -rf /var/lib/apt/lists/*
+
+# GUI / OpenGL / GPU 관련 패키지 설치 --------------------------------------------------
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libgl1-mesa-glx \
+    libgl1-mesa-dri \
+    libxcb-glx0 \
+    libxrender1 \
+    libxi6 \
+    libxtst6 \
+    libxrandr2 \
+    libxinerama1 \
+    libxcursor1 \
+    mesa-utils \
+    x11-apps \
+    && rm -rf /var/lib/apt/lists/*
+
+# Python 패키지 설치 ------------------------------------------------------------
+RUN pip3 install --no-cache-dir numpy opencv-python pyrealsense2
+
+# rosdep 초기화 ------------------------------------------------------------
+RUN rosdep init && rosdep update
+
+# 환경 변수 설정 ------------------------------------------------------------
+RUN echo 'export PATH=/usr/local/cuda-${CUDA_VERSION}/bin:$PATH' >> ~/.bashrc \
+    && echo 'export LD_LIBRARY_PATH=/usr/local/cuda-${CUDA_VERSION}/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc \
+    && echo "source /opt/ros/${ROS_VERSION}/setup.bash" >> ~/.bashrc
+
+# 워크스페이스 및 엔트리포인트 설정 ------------------------------------------------------------
+WORKDIR /root/ros2_ws
+RUN mkdir -p /root/ros2_ws/src
+COPY ./entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["bash"]
