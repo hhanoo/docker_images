@@ -32,6 +32,7 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get update && apt-get install -y \
     libgl1-mesa-dev \
     mesa-common-dev \
+    mesa-utils \
     libglu1-mesa-dev \
     libx11-dev \
     libxext-dev \
