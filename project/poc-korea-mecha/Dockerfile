@@ -35,6 +35,9 @@ RUN apt-get clean && apt-get update && apt-get upgrade -y && apt-get install --n
 RUN apt-get clean && apt-get update && apt-get upgrade -y && apt-get install --no-install-recommends -y \
     python3-pip \
     python3-tk \
+    python3-pyqt5 \
+    python3-pyqt5.qtwebkit \
+    python3-pyqt5.qtsvg \
     && rm -rf /var/lib/apt/lists/*
 
 # C/C++ 컴파일 필수 도구 ------------------------------------------------------------
@@ -51,7 +54,7 @@ RUN apt-get clean && apt-get update && apt-get upgrade -y && apt-get install --n
     libxext6 \
     && rm -rf /var/lib/apt/lists/*
 
-# USB 통신 (RealSense 등) ------------------------------------------------------------  
+# USB 통신 (RealSense 등) ------------------------------------------------------------
 RUN apt-get clean && apt-get update && apt-get upgrade -y && apt-get install --no-install-recommends -y \
     libusb-1.0-0 \
     udev \
@@ -82,8 +85,13 @@ RUN pip3 install --no-cache-dir \
 
 # 환경 변수 설정 ------------------------------------------------------------
 RUN echo 'export PATH=/usr/local/cuda-${CUDA_VERSION}/bin:$PATH' >> ~/.bashrc \
-    && echo 'export LD_LIBRARY_PATH=/usr/local/cuda-${CUDA_VERSION}/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc 
+    && echo 'export LD_LIBRARY_PATH=/usr/local/cuda-${CUDA_VERSION}/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
+
+# 엔트리포인트 설정 ------------------------------------------------------------
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 # 워크스페이스 및 엔트리포인트 설정 ------------------------------------------------------------
 WORKDIR /root/workspace
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["bash"]
