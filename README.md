@@ -17,7 +17,7 @@ ROS 2, CUDA, PyTorch, OpenCV 등을 포함한 다양한 개발 환경 제공
 
 | 이미지                                                                        | 설명                                         | GPU | CUDA   | Ubuntu | 릴리즈 |
 | ----------------------------------------------------------------------------- | -------------------------------------------- | :-: | ------ | ------ | ------ |
-| [project/apriltag-pose-ros2-humble](project/apriltag-pose-ros2-humble/)       | AprilTag 기반 포즈 추정                      |  -  | -      | 22.04  | v1.2.0 |
+| [project/apriltag-pose-ros2-humble](project/apriltag-pose-ros2-humble/)       | AprilTag 기반 포즈 추정                      |  -  | -      | 22.04  | v1.2.1 |
 | [project/gripper-manager](project/gripper-manager/)                           | 그리퍼 제어 관리 애플리케이션                |  -  | -      | -      | v1.0.0 |
 | [project/hand-eye-calibration-humble](project/hand-eye-calibration-humble/)   | Hand-Eye 캘리브레이션 프로그램               |  O  | 12.5.1 | 22.04  | v1.1.1 |
 | [project/manipulator-manager](project/manipulator-manager/)                   | 로봇 팔/매니퓰레이터 제어 애플리케이션       |  -  | -      | 22.04  | v1.0.0 |
