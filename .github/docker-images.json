@@ -25,9 +25,9 @@
     "path": "project/marker-pose-benchmark-humble"
   },
   {
-    "tag": "poc-daekeum",
+    "tag": "poc-daekeum-humble",
     "repo": "hhanoo/project",
-    "path": "project/poc-daekeum"
+    "path": "project/poc-daekeum-humble"
   },
   {
     "tag": "poc-korea-mecha",
