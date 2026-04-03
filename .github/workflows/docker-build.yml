@@ -1,0 +1,103 @@
+# =============================================================================
+# Dockerfile 변경 시 Docker Hub에 이미지를 자동으로 빌드/푸시하는 워크플로우
+#
+# 이미지 추가/수정 시 .github/docker-images.json 만 편집하면 됨
+# =============================================================================
+name: Docker Build
+
+# =============================================================================
+# 워크플로우 실행 조건
+# - main 브랜치에 push 시 ros/** 또는 project/** 경로에 변경이 있을 때 실행
+#   (README, DOCKERHUB.md 등 Dockerfile 외 파일 변경으로도 실행될 수 있으나,
+#    실제 빌드 대상은 docker-images.json의 path와 매칭되는 이미지만 선별됨)
+# - workflow_dispatch로 수동 실행 가능 (특정 이미지 또는 전체)
+# =============================================================================
+on:
+  push:
+    branches: [main]
+    paths: ["ros/**", "project/**"]
+
+  workflow_dispatch:
+    inputs:
+      images:
+        description: 'Image tags to build (comma-separated or "all")'
+        required: false
+        default: "all"
+
+# =============================================================================
+# 중복 실행 방지
+# - 동일한 ref에 대해 워크플로우가 동시에 여러 번 실행되는 상황 방지
+# =============================================================================
+concurrency:
+  group: docker-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ===========================================================================
+  # 변경 감지 Job
+  # - push 이벤트: git diff로 변경된 파일을 감지하여 해당 이미지만 선별
+  # - workflow_dispatch: 입력값("all" 또는 쉼표 구분 태그)으로 빌드 대상 결정
+  # - 출력: 빌드할 이미지 목록 JSON 배열
+  # ===========================================================================
+  detect-changes:
+    runs-on: ubuntu-22.04
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+      has_images: ${{ steps.matrix.outputs.has_images }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # =====================================================================
+      # 변경 감지 및 매트릭스 생성
+      # - .github/docker-images.json에서 이미지 정의를 읽어옴
+      #
+      # workflow_dispatch (수동 실행):
+      #   - "all" 입력 시 전체 이미지 빌드
+      #   - 쉼표 구분 태그 입력 시 해당 이미지만 빌드
+      #
+      # push (자동 실행):
+      #   - git diff로 변경된 파일 목록을 추출
+      #   - 각 이미지의 path와 비교하여 해당 디렉토리에 변경이 있는 이미지만 선별
+      #
+      # 최종 결과를 JSON 매트릭스로 출력하여 reusable workflow에 전달
+      # =====================================================================
+      - name: Detect changes and build matrix
+        id: matrix
+        env:
+          EVENT: ${{ github.event_name }}
+          INPUT: ${{ github.event.inputs.images }}
+        run: |
+          DEFS=$(cat .github/docker-images.json)
+
+          if [[ "${EVENT}" == "workflow_dispatch" ]]; then
+            if [[ "${INPUT}" == "all" ]]; then
+              SELECTED="${DEFS}"
+            else
+              TAGS=$(echo "${INPUT}" | tr ',' '\n' | sed 's/^ *//;s/ *$//' | jq -R . | jq -sc .)
+              SELECTED=$(echo "${DEFS}" | jq --argjson t "${TAGS}" '[.[] | select(.tag as $t | $ARGS.named.t | index($t))]' --jsonargs)
+            fi
+          else
+            CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD 2>/dev/null || git diff --name-only HEAD)
+            SELECTED=$(echo "${DEFS}" | jq --arg files "${CHANGED_FILES}" '
+              ($files | split("\n") | map(select(length > 0))) as $f |
+              [.[] | select(.path as $p | $f | any(startswith($p)))]')
+          fi
+
+          MATRIX=$(echo "${SELECTED}" | jq -c .)
+          echo "matrix=${MATRIX}" >> $GITHUB_OUTPUT
+          echo "has_images=$(echo "${MATRIX}" | jq -r 'if length > 0 then "true" else "false" end')" >> $GITHUB_OUTPUT
+
+  # ===========================================================================
+  # Docker 이미지 빌드
+  # - 공용 저장소의 reusable workflow를 호출해 빌드 로직을 재사용
+  # ===========================================================================
+  build:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.has_images == 'true'
+    uses: hhanoo/github-common/.github/workflows/docker-build-reusable.yml@main
+    with:
+      images: ${{ needs.detect-changes.outputs.matrix }}
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}

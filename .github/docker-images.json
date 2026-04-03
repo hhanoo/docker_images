@@ -1,0 +1,52 @@
+[
+  {
+    "tag": "humble-desktop",
+    "repo": "hhanoo/ros",
+    "path": "ros/humble/desktop"
+  },
+  {
+    "tag": "humble-cuda-12.5.1-gazebo",
+    "repo": "hhanoo/ros",
+    "path": "ros/humble/cuda/12.5.1/gazebo"
+  },
+  {
+    "tag": "humble-cuda-12.5.1-harmonic",
+    "repo": "hhanoo/ros",
+    "path": "ros/humble/cuda/12.5.1/harmonic"
+  },
+  {
+    "tag": "apriltag-pose-ros2-humble",
+    "repo": "hhanoo/project",
+    "path": "project/apriltag-pose-ros2-humble"
+  },
+  {
+    "tag": "gripper-manager",
+    "repo": "hhanoo/project",
+    "path": "project/gripper-manager"
+  },
+  {
+    "tag": "hand-eye-calibration-humble",
+    "repo": "hhanoo/project",
+    "path": "project/hand-eye-calibration-humble"
+  },
+  {
+    "tag": "manipulator-manager",
+    "repo": "hhanoo/project",
+    "path": "project/manipulator-manager"
+  },
+  {
+    "tag": "marker-pose-benchmark-humble",
+    "repo": "hhanoo/project",
+    "path": "project/marker-pose-benchmark-humble"
+  },
+  {
+    "tag": "poc-korea-mecha",
+    "repo": "hhanoo/project",
+    "path": "project/poc-korea-mecha"
+  },
+  {
+    "tag": "poc-sfsc-conveyor-system",
+    "repo": "hhanoo/project",
+    "path": "project/poc-sfsc-conveyor-system"
+  }
+]
