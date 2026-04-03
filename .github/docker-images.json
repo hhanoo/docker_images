@@ -1,20 +1,5 @@
 [
   {
-    "tag": "humble-desktop",
-    "repo": "hhanoo/ros",
-    "path": "ros/humble/desktop"
-  },
-  {
-    "tag": "humble-cuda-12.5.1-gazebo",
-    "repo": "hhanoo/ros",
-    "path": "ros/humble/cuda/12.5.1/gazebo"
-  },
-  {
-    "tag": "humble-cuda-12.5.1-harmonic",
-    "repo": "hhanoo/ros",
-    "path": "ros/humble/cuda/12.5.1/harmonic"
-  },
-  {
     "tag": "apriltag-pose-ros2-humble",
     "repo": "hhanoo/project",
     "path": "project/apriltag-pose-ros2-humble"
@@ -40,6 +25,11 @@
     "path": "project/marker-pose-benchmark-humble"
   },
   {
+    "tag": "poc-daekeum",
+    "repo": "hhanoo/project",
+    "path": "project/poc-daekeum"
+  },
+  {
     "tag": "poc-korea-mecha",
     "repo": "hhanoo/project",
     "path": "project/poc-korea-mecha"
@@ -48,5 +38,20 @@
     "tag": "poc-sfsc-conveyor-system",
     "repo": "hhanoo/project",
     "path": "project/poc-sfsc-conveyor-system"
+  },
+  {
+    "tag": "humble-cuda-12.5.1-gazebo",
+    "repo": "hhanoo/ros",
+    "path": "ros/humble/cuda/12.5.1/gazebo"
+  },
+  {
+    "tag": "humble-cuda-12.5.1-harmonic",
+    "repo": "hhanoo/ros",
+    "path": "ros/humble/cuda/12.5.1/harmonic"
+  },
+  {
+    "tag": "humble-desktop",
+    "repo": "hhanoo/ros",
+    "path": "ros/humble/desktop"
   }
 ]

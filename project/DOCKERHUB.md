@@ -11,6 +11,7 @@
 | `hand-eye-calibration-humble`  | Hand-Eye 캘리브레이션 프로그램               |  O  | 12.5.1 | 22.04  | v1.1.2 |
 | `manipulator-manager`          | 로봇 팔/매니퓰레이터 제어 애플리케이션       |  -  | -      | 22.04  | v1.0.1 |
 | `marker-pose-benchmark-humble` | 마커 포즈 벤치마크                           |  -  | -      | 22.04  | v1.0.1 |
+| `poc-daekeum`                  | Doosan 로봇 기반 CNC 머신 텐딩 시스템        |  O  | 12.1.1 | 22.04  | v1.0.1 |
 | `poc-korea-mecha`              | UR 로봇 기반 인장 시편 자동 머신 텐딩 시스템 |  O  | 12.1.1 | 20.04  | v1.1.1 |
 | `poc-sfsc-conveyor-system`     | UR 로봇 기반 가죽 분류 컨베이어 시스템       |  O  | 12.1.1 | 22.04  | -      |
 
@@ -31,6 +32,9 @@ docker pull hhanoo/project:manipulator-manager
 
 # 마커 포즈 벤치마크
 docker pull hhanoo/project:marker-pose-benchmark-humble
+
+# CNC 머신 텐딩 POC
+docker pull hhanoo/project:poc-daekeum
 
 # 기계/로보틱스 POC
 docker pull hhanoo/project:poc-korea-mecha
@@ -70,6 +74,12 @@ docker pull hhanoo/project:poc-sfsc-conveyor-system
 - **베이스**: `hhanoo/ros:humble-desktop`
 - **주요 기능**: AprilTag 포즈 벤치마크, UR 로봇 드라이버, RealSense, OpenCV, PyQt5, ROS 2 control
 - **GitHub**: https://github.com/hhanoo/marker_pose_benchmark
+
+### poc-daekeum
+
+- **베이스**: `nvidia/cuda:12.1.1-devel-ubuntu22.04`
+- **주요 기능**: CUDA 12.1.1, ROS 2 Humble, PyTorch 2.5.1, Detectron2, Detic, RealSense, OpenCV, PyQt5, AprilTag, Modbus
+- **GitHub**: https://github.com/hhanoo/POC_Daekeum
 
 ### poc-korea-mecha
 
