@@ -159,12 +159,11 @@ RUN groupadd -f plugdev && \
 RUN rosdep init && rosdep update
 
 # CUDA PATH environment variables -----------------------------------------
-RUN echo "export PATH=/usr/local/cuda/bin:\$PATH" >> /root/.bashrc && \
-    echo "export LD_LIBRARY_PATH=/usr/local/cuda/lib64:\$LD_LIBRARY_PATH" >> /root/.bashrc
+ENV PATH=/usr/local/cuda/bin:${PATH}
+ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64:${LD_LIBRARY_PATH}
 
 # Setup workspace ----------------------------------------------------------
 WORKDIR /ros2_ws
-RUN mkdir -p /ros2_ws/src
 
 # Aliases ---------------------------------------------------------------
 COPY ./aliases.sh /etc/profile.d/aliases.sh
