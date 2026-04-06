@@ -4,11 +4,11 @@ ROS 2 기반 로보틱스 개발을 위한 Docker 이미지
 
 ## 태그 목록
 
-| 태그 | 설명 | GPU | CUDA | Ubuntu |
-|------|------|:---:|------|--------|
-| `humble-cuda-12.5.1-gazebo` | GPU 가속 Gazebo 시뮬레이터 환경 | O | 12.5.1 | 22.04 |
-| `humble-cuda-12.5.1-harmonic` | 차세대 Gazebo Harmonic 시뮬레이터 환경 | O | 12.5.1 | 22.04 |
-| `humble-desktop` | ROS 2 Humble 데스크톱 개발 환경 | - | - | 22.04 |
+| 태그                          | 설명                                   | GPU | CUDA   | Ubuntu |
+| ----------------------------- | -------------------------------------- | :-: | ------ | ------ |
+| `humble-cuda-12.5.1-gazebo`   | GPU 가속 Gazebo 시뮬레이터 환경        |  O  | 12.5.1 | 22.04  |
+| `humble-cuda-12.5.1-harmonic` | 차세대 Gazebo Harmonic 시뮬레이터 환경 |  O  | 12.5.1 | 22.04  |
+| `humble-desktop`              | ROS 2 Humble 데스크톱 개발 환경        |  -  | -      | 22.04  |
 
 ## 사용법
 
