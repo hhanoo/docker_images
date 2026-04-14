@@ -69,9 +69,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-${ROS_DISTRO}-ament-cmake \
     && rm -rf /var/lib/apt/lists/*
 
-# Intel RealSense SDK ------------------------------------------------------
+# CycloneDDS RMW (preferred for large sensor messages) --------------------
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    ros-${ROS_DISTRO}-realsense2-* \
+    ros-${ROS_DISTRO}-rmw-cyclonedds-cpp \
     && rm -rf /var/lib/apt/lists/*
 
 # Vision ROS2 Packages (cv_bridge, tf2, image_transport) -------------------
@@ -85,6 +85,31 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-${ROS_DISTRO}-rclpy \
     && rm -rf /var/lib/apt/lists/*
 
+# Intel RealSense SDK ------------------------------------------------------
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ros-${ROS_DISTRO}-realsense2-* \
+    && rm -rf /var/lib/apt/lists/*
+
+# Orbbec SDK ---------------------------------------------------------------
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libgflags-dev nlohmann-json3-dev \
+    ros-${ROS_DISTRO}-image-transport \
+    ros-${ROS_DISTRO}-image-transport-plugins \
+    ros-${ROS_DISTRO}-compressed-image-transport \
+    ros-${ROS_DISTRO}-image-publisher \
+    ros-${ROS_DISTRO}-camera-info-manager \
+    ros-${ROS_DISTRO}-diagnostic-updater \
+    ros-${ROS_DISTRO}-diagnostic-msgs \
+    ros-${ROS_DISTRO}-statistics-msgs \
+    ros-${ROS_DISTRO}-xacro \
+    ros-${ROS_DISTRO}-backward-ros \
+    libdw-dev \
+    libssl-dev \
+    mesa-utils \
+    libgl1 \
+    libgoogle-glog-dev \
+    && rm -rf /var/lib/apt/lists/*
+
 # Robot Description and Visualization -------------------------------------
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-${ROS_DISTRO}-urdf \
@@ -95,7 +120,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-${ROS_DISTRO}-rviz2 \
     && rm -rf /var/lib/apt/lists/*
 
-# Tool Dependencies (USB for RealSense) -----------------------------------
+# Tool Dependencies (USB for vision sensors) ------------------------------
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libusb-1.0-0 \
     libusb-1.0-0-dev \
@@ -162,13 +187,16 @@ RUN rosdep init && rosdep update
 ENV PATH=/usr/local/cuda/bin:${PATH}
 ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64:${LD_LIBRARY_PATH}
 
-# Setup workspace ----------------------------------------------------------
+# Setup workspace -----------------------------------------------------------
 WORKDIR /ros2_ws
 
 # Aliases ---------------------------------------------------------------
 COPY ./aliases.sh /etc/profile.d/aliases.sh
 RUN chmod 644 /etc/profile.d/aliases.sh && \
     echo 'source /etc/profile.d/aliases.sh' >> /etc/bash.bashrc
+
+# CycloneDDS configuration -------------------------------------------------
+COPY ./cyclonedds.xml /etc/cyclonedds.xml
 
 # Entrypoint ---------------------------------------------------------------
 COPY ./entrypoint.sh /entrypoint.sh
