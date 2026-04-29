@@ -1,0 +1,23 @@
+# Docker image name (used by run.sh)
+# - Default: Docker Hub pre-built image
+# - Override: ./run.sh isaac-sim-5.1.0-jazzy   (CLI arg overrides this)
+# - Available tags: isaac-sim-4.5.0-humble, isaac-sim-5.1.0-jazzy, isaac-lab-4.5.0-humble
+IMAGE_NAME="hhanoo/sim:isaac-sim-4.5.0-humble"
+
+# Docker container name (used in run.sh)
+CONTAINER_NAME="isaac-sim-4.5.0-humble"
+
+# ROS 2 domain ID for network isolation (used in run.sh)
+ROS_DOMAIN_ID="98"
+
+# Cache root directory (used in run.sh)
+# - Subdirectories per Isaac Sim version are auto-created.
+CACHE_ROOT="$HOME/docker/isaac-sim"
+
+# Optional ROS2 workspace mount (used in run.sh)
+# - Mounted at /ros2_ws inside the container.
+# - Useful for bringing in your own URDFs, USDs, custom scripts, ROS2 packages.
+# - Container's commands.sh auto-sources /ros2_ws/install/setup.bash if built.
+# - Empty = no workspace mount.
+# - Override per-run: ROS2_WS_ROOT=/path/to/project ./run.sh
+ROS2_WS_ROOT=""

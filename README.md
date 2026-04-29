@@ -3,16 +3,6 @@
 로보틱스 및 컴퓨터 비전 프로젝트를 위한 Docker 이미지 모음
 ROS 2, CUDA, PyTorch, OpenCV 등을 포함한 다양한 개발 환경 제공
 
-## ROS 2 이미지
-
-| 이미지                                                              | 설명                                   | GPU | CUDA   | Ubuntu | 릴리즈 |
-| ------------------------------------------------------------------- | -------------------------------------- | :-: | ------ | ------ | ------ |
-| [ros/humble/cuda/12.5.1/gazebo](ros/humble/cuda/12.5.1/gazebo/)     | GPU 가속 Gazebo 시뮬레이터 환경        |  O  | 12.5.1 | 22.04  | -      |
-| [ros/humble/cuda/12.5.1/harmonic](ros/humble/cuda/12.5.1/harmonic/) | 차세대 Gazebo Harmonic 시뮬레이터 환경 |  O  | 12.5.1 | 22.04  | -      |
-| [ros/humble/desktop](ros/humble/desktop/)                           | ROS 2 Humble 데스크톱 개발 환경        |  -  | -      | 22.04  | -      |
-
-> 상세: **[hhanoo/ros](ros/DOCKERHUB.md)** (Docker Hub 개요)
-
 ## 프로젝트 이미지
 
 | 이미지                                                                        | 설명                                         | GPU | CUDA   | Ubuntu | 릴리즈 |
@@ -27,6 +17,27 @@ ROS 2, CUDA, PyTorch, OpenCV 등을 포함한 다양한 개발 환경 제공
 | [project/poc-sfsc-conveyor-system](project/poc-sfsc-conveyor-system/)         | UR 로봇 기반 가죽 분류 컨베이어 시스템       |  O  | 12.1.1 | 22.04  | -      |
 
 > 상세: **[hhanoo/project](project/DOCKERHUB.md)** (Docker Hub 개요)
+
+## ROS 2 이미지
+
+| 이미지                                                              | 설명                                   | GPU | CUDA   | Ubuntu | 릴리즈 |
+| ------------------------------------------------------------------- | -------------------------------------- | :-: | ------ | ------ | ------ |
+| [ros/humble/cuda/12.5.1/gazebo](ros/humble/cuda/12.5.1/gazebo/)     | GPU 가속 Gazebo 시뮬레이터 환경        |  O  | 12.5.1 | 22.04  | -      |
+| [ros/humble/cuda/12.5.1/harmonic](ros/humble/cuda/12.5.1/harmonic/) | 차세대 Gazebo Harmonic 시뮬레이터 환경 |  O  | 12.5.1 | 22.04  | -      |
+| [ros/humble/desktop](ros/humble/desktop/)                           | ROS 2 Humble 데스크톱 개발 환경        |  -  | -      | 22.04  | -      |
+
+> 상세: **[hhanoo/ros](ros/DOCKERHUB.md)** (Docker Hub 개요)
+
+## 시뮬레이션 이미지
+
+| 이미지                                                    | 설명                                            | GPU | CUDA | Ubuntu | 릴리즈 |
+| --------------------------------------------------------- | ----------------------------------------------- | :-: | ---- | ------ | ------ |
+| [sim/isaac-sim/4.5.0-humble](sim/isaac-sim/4.5.0-humble/) | NVIDIA Isaac Sim 4.5.0 + ROS 2 Humble           |  O  | -    | 22.04  | -      |
+| [sim/isaac-sim/5.1.0-jazzy](sim/isaac-sim/5.1.0-jazzy/)   | NVIDIA Isaac Sim 5.1.0 + ROS 2 Jazzy            |  O  | -    | 24.04  | -      |
+| [sim/isaac-lab/4.5.0-humble](sim/isaac-lab/4.5.0-humble/) | Isaac Lab v2.2.1 (Sim 4.5.0 + Humble 위에 설치) |  O  | -    | 22.04  | -      |
+| [sim/isaac-lab/5.1.0-jazzy](sim/isaac-lab/5.1.0-jazzy/)   | Isaac Lab v2.3.2 (Sim 5.1.0 + Jazzy 위에 설치)  |  O  | -    | 24.04  | -      |
+
+> 상세: **[hhanoo/sim](sim/README.md)** (Docker Hub 개요 및 실행 가이드)
 
 ## 요구사항
 
