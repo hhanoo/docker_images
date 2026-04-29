@@ -53,5 +53,10 @@
     "tag": "humble-desktop",
     "repo": "hhanoo/ros",
     "path": "ros/humble/desktop"
+  },
+  {
+    "tag": "isaac-sim-4.5.0-humble",
+    "repo": "hhanoo/sim",
+    "path": "sim/isaac-sim/4.5.0-humble"
   }
 ]
