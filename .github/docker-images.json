@@ -68,5 +68,10 @@
     "tag": "isaac-lab-4.5.0-humble",
     "repo": "hhanoo/sim",
     "path": "sim/isaac-lab/4.5.0-humble"
+  },
+  {
+    "tag": "isaac-lab-5.1.0-jazzy",
+    "repo": "hhanoo/sim",
+    "path": "sim/isaac-lab/5.1.0-jazzy"
   }
 ]
