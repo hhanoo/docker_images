@@ -7,7 +7,7 @@ name: Docker Build
 
 # =============================================================================
 # 워크플로우 실행 조건
-# - main 브랜치에 push 시 ros/** 또는 project/** 경로에 변경이 있을 때 실행
+# - main 브랜치에 push 시 ros/**, project/**, sim/** 경로에 변경이 있을 때 실행
 #   (README, DOCKERHUB.md 등 Dockerfile 외 파일 변경으로도 실행될 수 있으나,
 #    실제 빌드 대상은 docker-images.json의 path와 매칭되는 이미지만 선별됨)
 # - workflow_dispatch로 수동 실행 가능 (특정 이미지 또는 전체)
@@ -15,7 +15,7 @@ name: Docker Build
 on:
   push:
     branches: [main]
-    paths: ["ros/**", "project/**"]
+    paths: ["ros/**", "project/**", "sim/**"]
 
   workflow_dispatch:
     inputs:
