@@ -58,5 +58,10 @@
     "tag": "isaac-sim-4.5.0-humble",
     "repo": "hhanoo/sim",
     "path": "sim/isaac-sim/4.5.0-humble"
+  },
+  {
+    "tag": "isaac-sim-5.1.0-jazzy",
+    "repo": "hhanoo/sim",
+    "path": "sim/isaac-sim/5.1.0-jazzy"
   }
 ]
