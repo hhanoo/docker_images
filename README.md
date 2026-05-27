@@ -1,41 +1,41 @@
 # Docker Images
 
-로보틱스 및 컴퓨터 비전 프로젝트를 위한 Docker 이미지 모음
-ROS 2, CUDA, PyTorch, OpenCV 등을 포함한 다양한 개발 환경 제공
+로보틱스 및 시뮬레이션등 프로젝트를 위한 Docker 이미지 모음
+ROS 2, CUDA, PyTorch 등을 포함한 개발 환경 제공
 
 ## 프로젝트 이미지
 
-| 이미지                                                                        | 설명                                         | GPU | CUDA   | Ubuntu | 릴리즈 |
-| ----------------------------------------------------------------------------- | -------------------------------------------- | :-: | ------ | ------ | ------ |
-| [project/apriltag-pose-ros2-humble](project/apriltag-pose-ros2-humble/)       | AprilTag 기반 포즈 추정                      |  -  | -      | 22.04  | v1.2.2 |
-| [project/gripper-manager](project/gripper-manager/)                           | 그리퍼 제어 관리 애플리케이션                |  -  | -      | -      | v1.0.1 |
-| [project/hand-eye-calibration-humble](project/hand-eye-calibration-humble/)   | Hand-Eye 캘리브레이션 프로그램               |  O  | 12.5.1 | 22.04  | v1.2.0 |
-| [project/manipulator-manager](project/manipulator-manager/)                   | 로봇 팔/매니퓰레이터 제어 애플리케이션       |  -  | -      | 22.04  | v1.0.1 |
-| [project/marker-pose-benchmark-humble](project/marker-pose-benchmark-humble/) | 마커 포즈 벤치마크                           |  -  | -      | 22.04  | v1.0.1 |
-| [project/poc-daekeum-humble](project/poc-daekeum-humble/)                     | Doosan 로봇 기반 CNC 머신 텐딩 시스템        |  O  | 12.1.1 | 22.04  | v1.0.1 |
-| [project/poc-korea-mecha](project/poc-korea-mecha/)                           | UR 로봇 기반 인장 시편 자동 머신 텐딩 시스템 |  O  | 12.1.1 | 20.04  | v1.1.1 |
-| [project/poc-sfsc-conveyor-system](project/poc-sfsc-conveyor-system/)         | UR 로봇 기반 가죽 분류 컨베이어 시스템       |  O  | 12.1.1 | 22.04  | -      |
+| Image                                                                         | GPU | CUDA   | Ubuntu | Release |
+| ----------------------------------------------------------------------------- | :-: | ------ | ------ | ------- |
+| [project/apriltag-pose-ros2-humble](project/apriltag-pose-ros2-humble/)       |  -  | -      | 22.04  | v3.1.0  |
+| [project/gripper-manager](project/gripper-manager/)                           |  -  | -      | -      | v1.0.1  |
+| [project/hand-eye-calibration-humble](project/hand-eye-calibration-humble/)   |  O  | 12.5.1 | 22.04  | v1.3.0  |
+| [project/manipulator-manager](project/manipulator-manager/)                   |  -  | -      | 22.04  | v1.0.1  |
+| [project/marker-pose-benchmark-humble](project/marker-pose-benchmark-humble/) |  -  | -      | 22.04  | v1.0.1  |
+| [project/poc-daekeum-humble](project/poc-daekeum-humble/)                     |  O  | 12.1.1 | 22.04  | v1.2.0  |
+| [project/poc-korea-mecha](project/poc-korea-mecha/)                           |  O  | 12.1.1 | 20.04  | v1.3.0  |
+| [project/poc-sfsc-conveyor-system](project/poc-sfsc-conveyor-system/)         |  O  | 12.1.1 | 22.04  | -       |
 
-> 상세: **[hhanoo/project](project/DOCKERHUB.md)** (Docker Hub 개요)
+> 상세: **[hhanoo/project](project/README.md)** (Docker Hub 개요)
 
 ## ROS 2 이미지
 
-| 이미지                                                              | 설명                                   | GPU | CUDA   | Ubuntu | 릴리즈 |
-| ------------------------------------------------------------------- | -------------------------------------- | :-: | ------ | ------ | ------ |
-| [ros/humble/cuda/12.5.1/gazebo](ros/humble/cuda/12.5.1/gazebo/)     | GPU 가속 Gazebo 시뮬레이터 환경        |  O  | 12.5.1 | 22.04  | -      |
-| [ros/humble/cuda/12.5.1/harmonic](ros/humble/cuda/12.5.1/harmonic/) | 차세대 Gazebo Harmonic 시뮬레이터 환경 |  O  | 12.5.1 | 22.04  | -      |
-| [ros/humble/desktop](ros/humble/desktop/)                           | ROS 2 Humble 데스크톱 개발 환경        |  -  | -      | 22.04  | -      |
+| Image                                                               | GPU | CUDA   | Ubuntu | Release |
+| ------------------------------------------------------------------- | :-: | ------ | ------ | ------- |
+| [ros/humble/cuda/12.5.1/gazebo](ros/humble/cuda/12.5.1/gazebo/)     |  O  | 12.5.1 | 22.04  | -       |
+| [ros/humble/cuda/12.5.1/harmonic](ros/humble/cuda/12.5.1/harmonic/) |  O  | 12.5.1 | 22.04  | -       |
+| [ros/humble/desktop](ros/humble/desktop/)                           |  -  | -      | 22.04  | -       |
 
-> 상세: **[hhanoo/ros](ros/DOCKERHUB.md)** (Docker Hub 개요)
+> 상세: **[hhanoo/ros](ros/README.md)** (Docker Hub 개요)
 
 ## 시뮬레이션 이미지
 
-| 이미지                                                    | 설명                                            | GPU | CUDA | Ubuntu | 릴리즈 |
-| --------------------------------------------------------- | ----------------------------------------------- | :-: | ---- | ------ | ------ |
-| [sim/isaac-sim/4.5.0-humble](sim/isaac-sim/4.5.0-humble/) | NVIDIA Isaac Sim 4.5.0 + ROS 2 Humble           |  O  | -    | 22.04  | -      |
-| [sim/isaac-sim/5.1.0-jazzy](sim/isaac-sim/5.1.0-jazzy/)   | NVIDIA Isaac Sim 5.1.0 + ROS 2 Jazzy            |  O  | -    | 24.04  | -      |
-| [sim/isaac-lab/4.5.0-humble](sim/isaac-lab/4.5.0-humble/) | Isaac Lab v2.2.1 (Sim 4.5.0 + Humble 위에 설치) |  O  | -    | 22.04  | -      |
-| [sim/isaac-lab/5.1.0-jazzy](sim/isaac-lab/5.1.0-jazzy/)   | Isaac Lab v2.3.2 (Sim 5.1.0 + Jazzy 위에 설치)  |  O  | -    | 24.04  | -      |
+| Image                                                     | GPU | CUDA | Ubuntu | Release |
+| --------------------------------------------------------- | :-: | ---- | ------ | ------- |
+| [sim/isaac-sim/4.5.0-humble](sim/isaac-sim/4.5.0-humble/) |  O  | -    | 22.04  | -       |
+| [sim/isaac-sim/5.1.0-jazzy](sim/isaac-sim/5.1.0-jazzy/)   |  O  | -    | 24.04  | -       |
+| [sim/isaac-lab/4.5.0-humble](sim/isaac-lab/4.5.0-humble/) |  O  | -    | 22.04  | -       |
+| [sim/isaac-lab/5.1.0-jazzy](sim/isaac-lab/5.1.0-jazzy/)   |  O  | -    | 24.04  | -       |
 
 > 상세: **[hhanoo/sim](sim/README.md)** (Docker Hub 개요 및 실행 가이드)
 
