@@ -1,97 +1,125 @@
-# Ubuntu 관련 ------------------------------------------------------------
+# =========================================================================
+# Base Image
+# =========================================================================
+# - Ubuntu Release
 ARG UBUNTU_RELEASE=20.04
 
-# CUDA 관련 ------------------------------------------------------------
+# - CUDA Release
 ARG CUDA_VERSION=12.1.1
 ARG CUDA_RELEASE=12.1
 ARG CUDA_PURPOSE=devel
-# ARG CUDNN_VERSION="cudnn-"
 ARG CUDNN_VERSION=""
 
-# CUDA Docker 이미지 다운로드 ------------------------------------------------------------
+# - CUDA Docker Image Download
 FROM nvcr.io/nvidia/cuda:${CUDA_VERSION}-${CUDNN_VERSION}${CUDA_PURPOSE}-ubuntu${UBUNTU_RELEASE}
 
-# 비대화 설치 모드, NVIDIA 설정 ------------------------------------------------------------
+# - NVIDIA Settings
 ENV DEBIAN_FRONTEND=noninteractive
 ENV NVIDIA_VISIBLE_DEVICES=all
 ENV NVIDIA_DRIVER_CAPABILITIES=all
 ENV XDG_RUNTIME_DIR=/tmp/runtime-root
 
-# 기본 시스템 도구 및 패키지 관리자  ------------------------------------------------------------
-RUN apt-get clean && apt-get update && apt-get upgrade -y && apt-get install --no-install-recommends -y \
+# =========================================================================
+# Locale and Font
+# =========================================================================
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    locales \
+    fonts-noto-color-emoji \
+    && rm -rf /var/lib/apt/lists/* \
+    && locale-gen en_US en_US.UTF-8 \
+    && update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+
+ENV LANG=en_US.UTF-8 \
+    LANGUAGE=en_US:en \
+    LC_ALL=en_US.UTF-8
+
+# =========================================================================
+# Essential Packages
+# =========================================================================
+RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-transport-https \
     apt-utils \
     ca-certificates \
+    curl \
+    git \
     software-properties-common \
     sudo \
-    curl \
-    wget \
-    git \
     vim \
-    locales \
+    wget \
     && rm -rf /var/lib/apt/lists/*
 
-# Python 환경 ------------------------------------------------------------
-RUN apt-get clean && apt-get update && apt-get upgrade -y && apt-get install --no-install-recommends -y \
+# =========================================================================
+# Python
+# =========================================================================
+# - Python 3
+RUN apt-get update && apt-get install -y --no-install-recommends \
     python3-pip \
     python3-tk \
+    && rm -rf /var/lib/apt/lists/*
+
+# - PyQt5
+RUN apt-get update && apt-get install -y --no-install-recommends \
     python3-pyqt5 \
-    python3-pyqt5.qtwebkit \
     python3-pyqt5.qtsvg \
+    python3-pyqt5.qtwebkit \
     && rm -rf /var/lib/apt/lists/*
 
-# C/C++ 컴파일 필수 도구 ------------------------------------------------------------
-RUN apt-get clean && apt-get update && apt-get upgrade -y && apt-get install --no-install-recommends -y \
-    build-essential \
-    && rm -rf /var/lib/apt/lists/*
-
-# GUI/그래픽 관련 라이브러리 (OpenCV 등) ------------------------------------------------------------
-RUN apt-get clean && apt-get update && apt-get upgrade -y && apt-get install --no-install-recommends -y \
+# - GUI/USB libraries (OpenCV, RealSense)
+RUN apt-get update && apt-get install -y --no-install-recommends \
     libgl1-mesa-glx \
     libglib2.0-0 \
     libsm6 \
-    libxrender1 \
-    libxext6 \
-    && rm -rf /var/lib/apt/lists/*
-
-# USB 통신 (RealSense 등) ------------------------------------------------------------
-RUN apt-get clean && apt-get update && apt-get upgrade -y && apt-get install --no-install-recommends -y \
     libusb-1.0-0 \
+    libxext6 \
+    libxrender1 \
     udev \
     && rm -rf /var/lib/apt/lists/*
 
-# 로케일 설정 ------------------------------------------------------------
-RUN locale-gen en_US en_US.UTF-8 && update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
-ENV LANG=en_US.UTF-8
-ENV LC_ALL=en_US.UTF-8
-ENV LANGUAGE=en_US:en_US
-
-# Python 패키지 설치 ------------------------------------------------------------
+# - Vision packages
 RUN pip3 install --no-cache-dir \
-    setuptools \
     Cython \
-    numpy \
-    scipy \
-    scikit-learn \
+    imutils \
     matplotlib \
+    numpy \
     opencv-python \
     pyrealsense2 \
+    scikit-learn \
+    scipy \
+    setuptools
+
+# - PyTorch packages
+RUN pip3 install --no-cache-dir \
     torch==2.4.1 \
-    torchvision==0.19.1 \
     torchaudio==2.4.1 \
+    torchvision==0.19.1
+
+# - Utility packages
+RUN pip3 install --no-cache-dir \
     pymodbus \
-    pyyaml \
-    imutils
+    pyyaml
 
-# 환경 변수 설정 ------------------------------------------------------------
-RUN echo 'export PATH=/usr/local/cuda-${CUDA_VERSION}/bin:$PATH' >> ~/.bashrc \
-    && echo 'export LD_LIBRARY_PATH=/usr/local/cuda-${CUDA_VERSION}/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
+# =========================================================================
+# C++ Build Dependencies
+# =========================================================================
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
 
-# 엔트리포인트 설정 ------------------------------------------------------------
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-
-# 워크스페이스 및 엔트리포인트 설정 ------------------------------------------------------------
+# =========================================================================
+# Workspace Setup
+# =========================================================================
+# - Workspace
 WORKDIR /root/workspace
+
+# - Commands
+COPY commands.sh /etc/profile.d/commands.sh
+RUN chmod 644 /etc/profile.d/commands.sh && \
+    echo 'source /etc/profile.d/commands.sh' >> /etc/bash.bashrc
+
+# - Entrypoint
+COPY ./entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
+
+# - Default command
 CMD ["bash"]
