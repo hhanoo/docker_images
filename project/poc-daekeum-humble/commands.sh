@@ -17,7 +17,6 @@ build() {
     cd /ros2_ws || return 1
     colcon build \
         --symlink-install \
-        --event-handlers console_direct+ \
         --cmake-args -DCMAKE_BUILD_TYPE=Release "$@"
     source-ros-ws
     source-config
