@@ -8,12 +8,12 @@ ROS 2, CUDA, PyTorch 등을 포함한 개발 환경 제공
 | Image                                                                         | GPU | CUDA   | Ubuntu | Release |
 | ----------------------------------------------------------------------------- | :-: | ------ | ------ | ------- |
 | [project/apriltag-pose-ros2-humble](project/apriltag-pose-ros2-humble/)       |  -  | -      | 22.04  | v3.1.0  |
-| [project/gripper-manager](project/gripper-manager/)                           |  -  | -      | -      | v1.0.1  |
+| [project/gripper-manager](project/gripper-manager/)                           |  -  | -      | -      | v1.1.0  |
 | [project/hand-eye-calibration-humble](project/hand-eye-calibration-humble/)   |  O  | 12.5.1 | 22.04  | v1.3.0  |
 | [project/manipulator-manager](project/manipulator-manager/)                   |  -  | -      | 22.04  | v1.0.1  |
 | [project/marker-pose-benchmark-humble](project/marker-pose-benchmark-humble/) |  -  | -      | 22.04  | v1.0.1  |
-| [project/poc-daekeum-humble](project/poc-daekeum-humble/)                     |  O  | 12.1.1 | 22.04  | v1.2.0  |
-| [project/poc-korea-mecha](project/poc-korea-mecha/)                           |  O  | 12.1.1 | 20.04  | v1.3.0  |
+| [project/poc-daekeum-humble](project/poc-daekeum-humble/)                     |  O  | 12.1.1 | 22.04  | v1.4.0  |
+| [project/poc-korea-mecha](project/poc-korea-mecha/)                           |  O  | 12.1.1 | 20.04  | v1.3.1  |
 | [project/poc-sfsc-conveyor-system](project/poc-sfsc-conveyor-system/)         |  O  | 12.1.1 | 22.04  | -       |
 
 > 상세: **[hhanoo/project](project/README.md)** (Docker Hub 개요)
