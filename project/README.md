@@ -8,7 +8,7 @@
 
 | 태그                           | 설명                                         | GPU | CUDA   | Ubuntu | 릴리즈 |
 | ------------------------------ | -------------------------------------------- | :-: | ------ | ------ | ------ |
-| `apriltag-pose-ros2-humble`    | AprilTag 기반 포즈 추정                      |  -  | -      | 22.04  | v3.1.0 |
+| `apriltag-pose-ros2-humble`    | AprilTag 기반 포즈 추정                      |  -  | -      | 22.04  | v3.2.0 |
 | `gripper-manager`              | 그리퍼 제어 관리 애플리케이션                |  -  | -      | -      | v1.1.0 |
 | `hand-eye-calibration-humble`  | Hand-Eye 캘리브레이션 프로그램               |  O  | 12.5.1 | 22.04  | v1.4.0 |
 | `manipulator-manager`          | 로봇 팔/매니퓰레이터 제어 애플리케이션       |  -  | -      | 22.04  | v1.0.1 |
@@ -50,7 +50,7 @@ docker pull hhanoo/project:poc-sfsc-conveyor-system
 ### apriltag-pose-ros2-humble
 
 - **베이스**: `hhanoo/ros:humble-desktop`
-- **주요 기능**: AprilTag 포즈 추정, Modbus 통신, RealSense, ROS 2 Humble
+- **주요 기능**: AprilTag 포즈 추정, Modbus 통신, USB 카메라, OpenCV, PyQt5, ROS 2 Humble
 - **GitHub**: https://github.com/hhanoo/AprilTag_Pose_ROS2
 
 ### gripper-manager
@@ -61,8 +61,8 @@ docker pull hhanoo/project:poc-sfsc-conveyor-system
 
 ### hand-eye-calibration-humble
 
-- **베이스**: `nvidia/cuda:12.5.1-devel-ubuntu22.04`
-- **주요 기능**: CUDA 12.5.1, ROS 2 Humble, Hand-Eye 캘리브레이션, RealSense, OpenCV, PyQt5, ros2-control
+- **베이스**: `nvcr.io/nvidia/cuda:12.5.1-devel-ubuntu22.04`
+- **주요 기능**: CUDA 12.5.1, ROS 2 Humble, Hand-Eye 캘리브레이션, RealSense/Orbbec, CycloneDDS, gdbserver 원격 디버깅, OpenCV, PyQt5, ros2-control
 - **GitHub**: https://github.com/hhanoo/hand-eye_calibration
 
 ### manipulator-manager
@@ -79,19 +79,19 @@ docker pull hhanoo/project:poc-sfsc-conveyor-system
 
 ### poc-daekeum-humble
 
-- **베이스**: `nvidia/cuda:12.1.1-devel-ubuntu22.04`
+- **베이스**: `nvcr.io/nvidia/cuda:12.1.1-devel-ubuntu22.04`
 - **주요 기능**: CUDA 12.1.1, ROS 2 Humble, PyTorch 2.5.1, Detectron2, Detic, RealSense, OpenCV, PyQt5, AprilTag, Modbus
 - **GitHub**: https://github.com/hhanoo/POC_Daekeum
 
 ### poc-korea-mecha
 
-- **베이스**: `nvidia/cuda:12.1.1-devel-ubuntu20.04`
+- **베이스**: `nvcr.io/nvidia/cuda:12.1.1-devel-ubuntu20.04`
 - **주요 기능**: CUDA 12.1.1, PyTorch 2.4.1, OpenCV, RealSense, Modbus, PyQt5
 - **GitHub**: https://github.com/hhanoo/POC_Korea_Mecha
 
 ### poc-sfsc-conveyor-system
 
-- **베이스**: `nvidia/cuda:12.1.1-devel-ubuntu22.04`
+- **베이스**: `nvcr.io/nvidia/cuda:12.1.1-devel-ubuntu22.04`
 - **주요 기능**: CUDA 12.1.1, PyTorch 2.4.1, PyQt5, RealSense, BiRefNet
 - **GitHub**: https://github.com/hhanoo/POC_SFSC/tree/sw_cert_2
 
