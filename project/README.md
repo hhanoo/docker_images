@@ -10,7 +10,7 @@
 | ------------------------------ | -------------------------------------------- | :-: | ------ | ------ | ------ |
 | `apriltag-pose-ros2-humble`    | AprilTag 기반 포즈 추정                      |  -  | -      | 22.04  | v3.1.0 |
 | `gripper-manager`              | 그리퍼 제어 관리 애플리케이션                |  -  | -      | -      | v1.1.0 |
-| `hand-eye-calibration-humble`  | Hand-Eye 캘리브레이션 프로그램               |  O  | 12.5.1 | 22.04  | v1.3.0 |
+| `hand-eye-calibration-humble`  | Hand-Eye 캘리브레이션 프로그램               |  O  | 12.5.1 | 22.04  | v1.4.0 |
 | `manipulator-manager`          | 로봇 팔/매니퓰레이터 제어 애플리케이션       |  -  | -      | 22.04  | v1.0.1 |
 | `marker-pose-benchmark-humble` | 마커 포즈 벤치마크                           |  -  | -      | 22.04  | v1.0.1 |
 | `poc-daekeum-humble`           | Doosan 로봇 기반 CNC 머신 텐딩 시스템        |  O  | 12.1.1 | 22.04  | v1.4.0 |

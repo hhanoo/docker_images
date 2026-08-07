@@ -9,7 +9,7 @@ ROS 2, CUDA, PyTorch 등을 포함한 개발 환경 제공
 | ----------------------------------------------------------------------------- | :-: | ------ | ------ | ------- |
 | [project/apriltag-pose-ros2-humble](project/apriltag-pose-ros2-humble/)       |  -  | -      | 22.04  | v3.1.0  |
 | [project/gripper-manager](project/gripper-manager/)                           |  -  | -      | -      | v1.1.0  |
-| [project/hand-eye-calibration-humble](project/hand-eye-calibration-humble/)   |  O  | 12.5.1 | 22.04  | v1.3.0  |
+| [project/hand-eye-calibration-humble](project/hand-eye-calibration-humble/)   |  O  | 12.5.1 | 22.04  | v1.4.0  |
 | [project/manipulator-manager](project/manipulator-manager/)                   |  -  | -      | 22.04  | v1.0.1  |
 | [project/marker-pose-benchmark-humble](project/marker-pose-benchmark-humble/) |  -  | -      | 22.04  | v1.0.1  |
 | [project/poc-daekeum-humble](project/poc-daekeum-humble/)                     |  O  | 12.1.1 | 22.04  | v1.4.0  |
