@@ -2,7 +2,9 @@
   {
     "tag": "apriltag-pose-ros2-humble",
     "repo": "hhanoo/project",
-    "path": "project/apriltag-pose-ros2-humble"
+    "path": "docker",
+    "source_repo": "hhanoo/AprilTag_Pose_ROS2",
+    "source_ref": "v3.2.0"
   },
   {
     "tag": "gripper-manager",

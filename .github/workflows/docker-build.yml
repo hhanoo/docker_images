@@ -2,20 +2,26 @@
 # Dockerfile 변경 시 Docker Hub에 이미지를 자동으로 빌드/푸시하는 워크플로우
 #
 # 이미지 추가/수정 시 .github/docker-images.json 만 편집하면 됨
+#
+# 이미지 정의는 두 종류로 나뉨
+#   - 로컬 이미지: 빌드 컨텍스트가 이 저장소 안에 있음 (ros/**, sim/**)
+#   - 외부 이미지: source_repo / source_ref 로 지정한 다른 저장소를 체크아웃해 빌드
 # =============================================================================
 name: Docker Build
 
 # =============================================================================
 # 워크플로우 실행 조건
-# - main 브랜치에 push 시 ros/**, project/**, sim/** 경로에 변경이 있을 때 실행
-#   (README, DOCKERHUB.md 등 Dockerfile 외 파일 변경으로도 실행될 수 있으나,
-#    실제 빌드 대상은 docker-images.json의 path와 매칭되는 이미지만 선별됨)
+# - main 브랜치에 push 시 아래 경로에 변경이 있을 때 실행
+#   - ros/**, project/**, sim/**: 로컬 이미지의 빌드 컨텍스트
+#   - .github/docker-images.json: 외부 이미지의 source_ref 갱신
+#   (README 등 Dockerfile 외 파일 변경으로도 실행될 수 있으나,
+#    실제 빌드 대상은 아래 감지 로직으로 선별됨)
 # - workflow_dispatch로 수동 실행 가능 (특정 이미지 또는 전체)
 # =============================================================================
 on:
   push:
     branches: [main]
-    paths: ["ros/**", "project/**", "sim/**"]
+    paths: ["ros/**", "project/**", "sim/**", ".github/docker-images.json"]
 
   workflow_dispatch:
     inputs:
@@ -60,7 +66,8 @@ jobs:
       #
       # push (자동 실행):
       #   - git diff로 변경된 파일 목록을 추출
-      #   - 각 이미지의 path와 비교하여 해당 디렉토리에 변경이 있는 이미지만 선별
+      #   - 로컬 이미지: 각 이미지의 path와 비교하여 변경이 있는 이미지만 선별
+      #   - 외부 이미지: docker-images.json 항목이 직전 커밋과 달라진 이미지만 선별
       #
       # 최종 결과를 JSON 매트릭스로 출력하여 reusable workflow에 전달
       # =====================================================================
@@ -81,9 +88,22 @@ jobs:
             fi
           else
             CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD 2>/dev/null || git diff --name-only HEAD)
-            SELECTED=$(echo "${DEFS}" | jq --arg files "${CHANGED_FILES}" '
+
+            LOCAL=$(echo "${DEFS}" | jq --arg files "${CHANGED_FILES}" '
               ($files | split("\n") | map(select(length > 0))) as $f |
-              [.[] | select(.path as $p | $f | any(startswith($p)))]')
+              [.[] | select(has("source_repo") | not)
+                   | select(.path as $p | $f | any(startswith($p)))]')
+
+            if echo "${CHANGED_FILES}" | grep -qx '.github/docker-images.json'; then
+              OLD=$(git show HEAD~1:.github/docker-images.json 2>/dev/null || echo '[]')
+              REMOTE=$(jq -n --argjson new "${DEFS}" --argjson old "${OLD}" '
+                [$new[] | select(has("source_repo"))
+                        | select(. as $e | ($old | map(select(.tag == $e.tag)) | first) != $e)]')
+            else
+              REMOTE='[]'
+            fi
+
+            SELECTED=$(jq -n --argjson a "${LOCAL}" --argjson b "${REMOTE}" '$a + $b | unique_by(.tag)')
           fi
 
           MATRIX=$(echo "${SELECTED}" | jq -c .)
@@ -103,3 +123,4 @@ jobs:
     secrets:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+      SOURCE_REPO_TOKEN: ${{ secrets.SOURCE_REPO_TOKEN }}
