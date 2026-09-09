@@ -9,17 +9,23 @@
   {
     "tag": "gripper-manager",
     "repo": "hhanoo/project",
-    "path": "project/gripper-manager"
+    "path": "docker",
+    "source_repo": "hhanoo/Gripper_manager",
+    "source_ref": "v1.1.0"
   },
   {
     "tag": "hand-eye-calibration-humble",
     "repo": "hhanoo/project",
-    "path": "project/hand-eye-calibration-humble"
+    "path": "docker",
+    "source_repo": "hhanoo/hand-eye_calibration",
+    "source_ref": "v1.4.0"
   },
   {
     "tag": "manipulator-manager",
     "repo": "hhanoo/project",
-    "path": "project/manipulator-manager"
+    "path": "docker",
+    "source_repo": "hhanoo/Manipulator_manager",
+    "source_ref": "v1.0.1"
   },
   {
     "tag": "marker-pose-benchmark-humble",
