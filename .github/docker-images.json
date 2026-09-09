@@ -54,6 +54,13 @@
     "path": "project/poc-sfsc-conveyor-system"
   },
   {
+    "tag": "universal-robots-ros2-humble",
+    "repo": "hhanoo/project",
+    "path": "docker",
+    "source_repo": "hhanoo/Universal_Robots_ROS2",
+    "source_ref": "v1.4.3"
+  },
+  {
     "tag": "humble-cuda-12.5.1-gazebo",
     "repo": "hhanoo/ros",
     "path": "ros/humble/cuda/12.5.1/gazebo"

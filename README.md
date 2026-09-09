@@ -15,6 +15,7 @@ ROS 2, CUDA, PyTorch 등을 포함한 개발 환경 제공
 | [poc-daekeum-humble](https://github.com/hhanoo/POC_Daekeum)                     |  O  | 12.1.1 | 22.04  | v1.4.0  |
 | [poc-korea-mecha](https://github.com/hhanoo/POC_Korea_Mecha)                    |  O  | 12.1.1 | 20.04  | v1.3.1  |
 | [project/poc-sfsc-conveyor-system](project/poc-sfsc-conveyor-system/)           |  O  | 12.1.1 | 22.04  | -       |
+| [universal-robots-ros2-humble](https://github.com/hhanoo/Universal_Robots_ROS2) |  -  | -      | 22.04  | v1.4.3  |
 
 > 상세: **[hhanoo/project](project/README.md)** (Docker Hub 개요)
 

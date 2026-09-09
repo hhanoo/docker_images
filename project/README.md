@@ -16,6 +16,7 @@
 | `poc-daekeum-humble`           | Doosan 로봇 기반 CNC 머신 텐딩 시스템        |  O  | 12.1.1 | 22.04  | v1.4.0 |
 | `poc-korea-mecha`              | UR 로봇 기반 인장 시편 자동 머신 텐딩 시스템 |  O  | 12.1.1 | 20.04  | v1.3.1 |
 | `poc-sfsc-conveyor-system`     | UR 로봇 기반 가죽 분류 컨베이어 시스템       |  O  | 12.1.1 | 22.04  | -      |
+| `universal-robots-ros2-humble` | UR 로봇 드라이버 및 모션 제어 패키지         |  -  | -      | 22.04  | v1.4.3 |
 
 ## 사용법
 
@@ -43,6 +44,9 @@ docker pull hhanoo/project:poc-korea-mecha
 
 # 컨베이어 시스템 POC
 docker pull hhanoo/project:poc-sfsc-conveyor-system
+
+# UR 로봇 드라이버
+docker pull hhanoo/project:universal-robots-ros2-humble
 ```
 
 ## 이미지 상세
@@ -94,6 +98,12 @@ docker pull hhanoo/project:poc-sfsc-conveyor-system
 - **베이스**: `nvcr.io/nvidia/cuda:12.1.1-devel-ubuntu22.04`
 - **주요 기능**: CUDA 12.1.1, PyTorch 2.4.1, PyQt5, RealSense, BiRefNet
 - **GitHub**: https://github.com/hhanoo/POC_SFSC/tree/sw_cert_2
+
+### universal-robots-ros2-humble
+
+- **베이스**: `hhanoo/ros:humble-desktop`
+- **주요 기능**: UR 로봇 드라이버, ros2-control, Pilz 산업용 모션 플래너, Qt6 GUI, Modbus 통신, Eigen3, ROS 2 Humble
+- **GitHub**: https://github.com/hhanoo/Universal_Robots_ROS2
 
 ## 요구사항
 
