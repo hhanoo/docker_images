@@ -5,16 +5,16 @@ ROS 2, CUDA, PyTorch 등을 포함한 개발 환경 제공
 
 ## 프로젝트 이미지
 
-| Image                                                                         | GPU | CUDA   | Ubuntu | Release |
-| ----------------------------------------------------------------------------- | :-: | ------ | ------ | ------- |
-| [apriltag-pose-ros2-humble](https://github.com/hhanoo/AprilTag_Pose_ROS2)     |  -  | -      | 22.04  | v3.2.0  |
-| [gripper-manager](https://github.com/hhanoo/Gripper_manager)                  |  -  | -      | -      | v1.1.0  |
-| [hand-eye-calibration-humble](https://github.com/hhanoo/hand-eye_calibration) |  O  | 12.5.1 | 22.04  | v1.4.0  |
-| [manipulator-manager](https://github.com/hhanoo/Manipulator_manager)          |  -  | -      | 22.04  | v1.0.1  |
-| [project/marker-pose-benchmark-humble](project/marker-pose-benchmark-humble/) |  -  | -      | 22.04  | v1.0.1  |
-| [project/poc-daekeum-humble](project/poc-daekeum-humble/)                     |  O  | 12.1.1 | 22.04  | v1.4.0  |
-| [project/poc-korea-mecha](project/poc-korea-mecha/)                           |  O  | 12.1.1 | 20.04  | v1.3.1  |
-| [project/poc-sfsc-conveyor-system](project/poc-sfsc-conveyor-system/)         |  O  | 12.1.1 | 22.04  | -       |
+| Image                                                                           | GPU | CUDA   | Ubuntu | Release |
+| ------------------------------------------------------------------------------- | :-: | ------ | ------ | ------- |
+| [apriltag-pose-ros2-humble](https://github.com/hhanoo/AprilTag_Pose_ROS2)       |  -  | -      | 22.04  | v3.2.0  |
+| [gripper-manager](https://github.com/hhanoo/Gripper_manager)                    |  -  | -      | -      | v1.1.0  |
+| [hand-eye-calibration-humble](https://github.com/hhanoo/hand-eye_calibration)   |  O  | 12.5.1 | 22.04  | v1.4.0  |
+| [manipulator-manager](https://github.com/hhanoo/Manipulator_manager)            |  -  | -      | 22.04  | v1.0.1  |
+| [marker-pose-benchmark-humble](https://github.com/hhanoo/marker_pose_benchmark) |  -  | -      | 22.04  | v1.1.0  |
+| [poc-daekeum-humble](https://github.com/hhanoo/POC_Daekeum)                     |  O  | 12.1.1 | 22.04  | v1.4.0  |
+| [poc-korea-mecha](https://github.com/hhanoo/POC_Korea_Mecha)                    |  O  | 12.1.1 | 20.04  | v1.3.1  |
+| [project/poc-sfsc-conveyor-system](project/poc-sfsc-conveyor-system/)           |  O  | 12.1.1 | 22.04  | -       |
 
 > 상세: **[hhanoo/project](project/README.md)** (Docker Hub 개요)
 

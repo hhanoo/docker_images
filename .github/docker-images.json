@@ -30,17 +30,23 @@
   {
     "tag": "marker-pose-benchmark-humble",
     "repo": "hhanoo/project",
-    "path": "project/marker-pose-benchmark-humble"
+    "path": "docker",
+    "source_repo": "hhanoo/marker_pose_benchmark",
+    "source_ref": "v1.1.0"
   },
   {
     "tag": "poc-daekeum-humble",
     "repo": "hhanoo/project",
-    "path": "project/poc-daekeum-humble"
+    "path": "docker",
+    "source_repo": "hhanoo/POC_Daekeum",
+    "source_ref": "v1.4.0"
   },
   {
     "tag": "poc-korea-mecha",
     "repo": "hhanoo/project",
-    "path": "project/poc-korea-mecha"
+    "path": "docker",
+    "source_repo": "hhanoo/POC_Korea_Mecha",
+    "source_ref": "v1.3.1"
   },
   {
     "tag": "poc-sfsc-conveyor-system",
