@@ -54,6 +54,13 @@
     "path": "project/poc-sfsc-conveyor-system"
   },
   {
+    "tag": "robust-marker-tending-humble",
+    "repo": "hhanoo/project",
+    "path": "docker",
+    "source_repo": "hhanoo/robust-marker-tending",
+    "source_ref": "v1.1.0"
+  },
+  {
     "tag": "universal-robots-ros2-humble",
     "repo": "hhanoo/project",
     "path": "docker",

@@ -16,6 +16,7 @@
 | `poc-daekeum-humble`           | Doosan 로봇 기반 CNC 머신 텐딩 시스템        |  O  | 12.1.1 | 22.04  | v1.4.0 |
 | `poc-korea-mecha`              | UR 로봇 기반 인장 시편 자동 머신 텐딩 시스템 |  O  | 12.1.1 | 20.04  | v1.3.1 |
 | `poc-sfsc-conveyor-system`     | UR 로봇 기반 가죽 분류 컨베이어 시스템       |  O  | 12.1.1 | 22.04  | -      |
+| `robust-marker-tending-humble` | Doosan 로봇 기반 마커+ICP 텐딩 시스템        |  O  | 12.5.1 | 22.04  | v1.1.0 |
 | `universal-robots-ros2-humble` | UR 로봇 드라이버 및 모션 제어 패키지         |  -  | -      | 22.04  | v1.4.3 |
 
 ## 사용법
@@ -44,6 +45,9 @@ docker pull hhanoo/project:poc-korea-mecha
 
 # 컨베이어 시스템 POC
 docker pull hhanoo/project:poc-sfsc-conveyor-system
+
+# 마커+ICP 텐딩 시스템
+docker pull hhanoo/project:robust-marker-tending-humble
 
 # UR 로봇 드라이버
 docker pull hhanoo/project:universal-robots-ros2-humble
@@ -98,6 +102,12 @@ docker pull hhanoo/project:universal-robots-ros2-humble
 - **베이스**: `nvcr.io/nvidia/cuda:12.1.1-devel-ubuntu22.04`
 - **주요 기능**: CUDA 12.1.1, PyTorch 2.4.1, PyQt5, RealSense, BiRefNet
 - **GitHub**: https://github.com/hhanoo/POC_SFSC/tree/sw_cert_2
+
+### robust-marker-tending-humble
+
+- **베이스**: `nvcr.io/nvidia/cuda:12.5.1-devel-ubuntu22.04`
+- **주요 기능**: CUDA 12.5.1, ROS 2 Humble, AprilTag + ICP 하이브리드 포즈 추정, Orbbec 카메라, Open3D, CycloneDDS
+- **GitHub**: https://github.com/hhanoo/robust-marker-tending
 
 ### universal-robots-ros2-humble
 
